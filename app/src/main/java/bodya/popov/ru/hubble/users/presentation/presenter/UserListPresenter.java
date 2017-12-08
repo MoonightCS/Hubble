@@ -41,7 +41,7 @@ public class UserListPresenter {
     public void onSearchBtnClicked() {
         isLoaded = false;
         mView.showLoadingIndicator(true);
-        mUsersInteractor.configureUserList("Moonlight", mSearchCallback);
+        mUsersInteractor.getUserList("Moonlight", mSearchCallback);
     }
 
 

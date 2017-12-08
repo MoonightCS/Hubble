@@ -38,7 +38,7 @@ public class SearchUsersFragment extends BaseFragment implements SearchUsersView
 
     private EditText mEditText;
     private ProgressBar mProgressBar;
-    private TextView mUsersTextView;
+    private TextView mNoUsersFoundTextView;
     private RecyclerView mRecyclerView;
     private Button mSearchButton;
 
@@ -119,6 +119,11 @@ public class SearchUsersFragment extends BaseFragment implements SearchUsersView
     public void showUsers(List<User> userList) {
         mUserListAdapter.setData(userList);
     }
+
+    @Override
+    public void showNoFoundUsers(boolean show) {
+
+    }
     // end
 
     @Override
@@ -132,8 +137,10 @@ public class SearchUsersFragment extends BaseFragment implements SearchUsersView
         });
         mEditText = parent.findViewById(R.id.search_edit_text);
         mProgressBar = parent.findViewById(R.id.progress_bar);
-        mUsersTextView = parent.findViewById(R.id.no_users_found_view);
+        mProgressBar.setVisibility(View.GONE);
 
+        mNoUsersFoundTextView = parent.findViewById(R.id.no_users_found_view);
+        mNoUsersFoundTextView.setVisibility(View.GONE);
 
         mRecyclerView = parent.findViewById(R.id.users_list_recycler_view);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());

@@ -23,7 +23,7 @@ public class SingleAsyncExecution<T> implements WorkerHandlerThread.WorkerCallba
 
 
     @NonNull
-    public static <T> SingleAsyncExecution<T> fromCallable(Callable<? extends T> callable) {
+    public static <T> SingleAsyncExecution<T> createFromCallableWithId(Callable<? extends T> callable) {
         if (callable == null) {
             throw new IllegalStateException("Callable cannot be null");
         }

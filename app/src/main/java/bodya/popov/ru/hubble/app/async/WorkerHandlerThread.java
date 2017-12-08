@@ -83,7 +83,6 @@ public class WorkerHandlerThread<T> extends HandlerThread {
                         if (callback != null) {
                             callback.onLoadFinished(future.get());
                         }
-                        quit();
                     }
                 }
             } catch (InterruptedException e) {

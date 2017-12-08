@@ -13,5 +13,8 @@ public interface SearchUsersView extends BaseView {
 
     void showUsers(List<User> userList);
 
+    void showNoFoundUsers(boolean show);
+
+
 
 }

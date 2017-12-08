@@ -1,5 +1,7 @@
 package bodya.popov.ru.hubble.app.async;
 
+import android.util.Log;
+
 import java.util.concurrent.Callable;
 
 /**
@@ -8,6 +10,7 @@ import java.util.concurrent.Callable;
 
 public class FutureTask<T> {
 
+    private long mId;
     private boolean mIsCanceled;
     private boolean mIsDone;
     private final Callable<? extends T> mCallable;
@@ -23,6 +26,7 @@ public class FutureTask<T> {
     }
 
     public synchronized void cancel() {
+        Log.e("FutureTask", "futureTask canceled");
         mIsCanceled = true;
     }
 
@@ -46,13 +50,23 @@ public class FutureTask<T> {
         return mException;
     }
 
+    public long getId() {
+        return mId;
+    }
+
     public void setResult(T result) {
         done();
         mResult = result;
+    }
+
+    public void setId(long id) {
+        mId = id;
     }
 
     public void setException(Exception exception) {
         done();
         mException = exception;
     }
+
+
 }
