@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -129,13 +131,32 @@ public class SearchUsersFragment extends BaseFragment implements SearchUsersView
     @Override
     protected void initViews(View parent) {
         mSearchButton = parent.findViewById(R.id.search_button);
+        mSearchButton.setEnabled(false);
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListPresenter.onSearchBtnClicked();
+                mListPresenter.onSearchBtnClicked(mEditText.getText().toString().trim());
             }
         });
         mEditText = parent.findViewById(R.id.search_edit_text);
+        mEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.toString().trim().length() == 0) {
+                    mSearchButton.setEnabled(false);
+                } else {
+                    mSearchButton.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
         mProgressBar = parent.findViewById(R.id.progress_bar);
         mProgressBar.setVisibility(View.GONE);
 

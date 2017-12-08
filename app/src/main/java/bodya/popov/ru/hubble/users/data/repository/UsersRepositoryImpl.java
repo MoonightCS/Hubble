@@ -7,6 +7,7 @@ import java.io.IOException;
 import bodya.popov.ru.hubble.users.data.api.GithubUsersApi;
 import bodya.popov.ru.hubble.users.data.bean.request.SearchUsersRequestBean;
 import bodya.popov.ru.hubble.users.data.bean.response.UsersResponseBean;
+import rx.Single;
 
 /**
  * @author Popov Bogdan
@@ -32,6 +33,11 @@ public class UsersRepositoryImpl implements UsersRepository {
             e.printStackTrace();
         }
         return responseBean;
+    }
+
+    @Override
+    public Single<UsersResponseBean> getRxUsersResponse(SearchUsersRequestBean requestBean) {
+        return mApi.getRxData(requestBean.getQuery());
     }
 
 }

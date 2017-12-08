@@ -10,6 +10,7 @@ import bodya.popov.ru.hubble.app.async.SingleAsyncExecution;
 import bodya.popov.ru.hubble.users.domain.interactor.UsersInteractor;
 import bodya.popov.ru.hubble.users.domain.model.User;
 import bodya.popov.ru.hubble.users.presentation.view.SearchUsersView;
+import rx.Single;
 
 /**
  * @author Popov Bogdan
@@ -38,10 +39,14 @@ public class UserListPresenter {
         mView = null;
     }
 
-    public void onSearchBtnClicked() {
+    public void onSearchBtnClicked(final String searchValue) {
         isLoaded = false;
         mView.showLoadingIndicator(true);
-        mUsersInteractor.getUserList("Moonlight", mSearchCallback);
+        Single<List<User>> singleUserList = mUsersInteractor.getSingleUserList(searchValue);
+        singleUserList.subscribe(userList -> {
+            mView.showUsers(userList);
+            mView.showLoadingIndicator(false);
+        }, throwable -> mView.showLoadingIndicator(false));
     }
 
 

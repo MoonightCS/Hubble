@@ -6,7 +6,10 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.CallAdapter;
+import retrofit2.Converter;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
 /**
@@ -18,10 +21,12 @@ public class ApiModule {
 
     @Provides
     @UsersScope
-    GithubUsersApi provideGithubUsersApi(OkHttpClient okHttpClient) {
+    GithubUsersApi provideGithubUsersApi(OkHttpClient okHttpClient,
+                                         Converter.Factory converterFactory, CallAdapter.Factory adapterFactory) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.github.com")
-                .addConverterFactory(JacksonConverterFactory.create())
+                .addConverterFactory(converterFactory)
+                .addCallAdapterFactory(adapterFactory)
                 .client(okHttpClient)
                 .build();
         return retrofit.create(GithubUsersApi.class);
@@ -36,6 +41,18 @@ public class ApiModule {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(logging);
         return httpClient.build();
+    }
+
+    @Provides
+    @UsersScope
+    CallAdapter.Factory provideCallAdapterFactory() {
+        return RxJavaCallAdapterFactory.create();
+    }
+
+    @Provides
+    @UsersScope
+    Converter.Factory provideConverterFactory() {
+        return JacksonConverterFactory.create();
     }
 
 }
