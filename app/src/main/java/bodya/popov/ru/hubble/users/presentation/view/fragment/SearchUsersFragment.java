@@ -124,7 +124,7 @@ public class SearchUsersFragment extends BaseFragment implements SearchUsersView
 
     @Override
     public void showNoFoundUsers(boolean show) {
-
+        mNoUsersFoundTextView.setVisibility(show ? View.VISIBLE : View.GONE);
     }
     // end
 

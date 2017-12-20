@@ -14,7 +14,6 @@ import bodya.popov.ru.hubble.users.data.repository.UsersRepository;
 import bodya.popov.ru.hubble.users.domain.converter.UserBeanUserConverter;
 import bodya.popov.ru.hubble.users.domain.model.User;
 import rx.Single;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 import static bodya.popov.ru.hubble.users.domain.model.FutureTaskIdentityKey.SEARCH_USERS;
@@ -39,10 +38,8 @@ public class UsersInteractor {
         final SearchUsersRequestBean requestBean = new SearchUsersRequestBean();
         requestBean.setQuery(query);
         return mRepository.getRxUsersResponse(requestBean)
-                .subscribeOn(Schedulers.io())
                 .map(usersResponseBean -> mUserConverter.convertList(usersResponseBean.getUserBeanList()))
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread());
+                .observeOn(Schedulers.computation());
     }
 
     public FutureTask<List<User>> getUserList(String query, SingleAsyncExecution.Callback<List<User>> callback) {
