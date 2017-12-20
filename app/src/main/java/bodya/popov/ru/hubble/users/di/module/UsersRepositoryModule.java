@@ -1,7 +1,7 @@
 package bodya.popov.ru.hubble.users.di.module;
 
 import bodya.popov.ru.hubble.users.data.api.GithubUsersApi;
-import bodya.popov.ru.hubble.users.data.repository.UsersRepository;
+import bodya.popov.ru.hubble.users.domain.repository.UsersRepository;
 import bodya.popov.ru.hubble.users.data.repository.UsersRepositoryImpl;
 import bodya.popov.ru.hubble.users.di.UsersScope;
 import dagger.Module;

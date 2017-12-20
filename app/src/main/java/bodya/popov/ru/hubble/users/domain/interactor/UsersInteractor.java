@@ -10,7 +10,7 @@ import bodya.popov.ru.hubble.app.async.SingleAsyncExecution;
 import bodya.popov.ru.hubble.users.data.bean.request.SearchUsersRequestBean;
 import bodya.popov.ru.hubble.users.data.bean.response.UserBean;
 import bodya.popov.ru.hubble.users.data.bean.response.UsersResponseBean;
-import bodya.popov.ru.hubble.users.data.repository.UsersRepository;
+import bodya.popov.ru.hubble.users.domain.repository.UsersRepository;
 import bodya.popov.ru.hubble.users.domain.converter.UserBeanUserConverter;
 import bodya.popov.ru.hubble.users.domain.model.User;
 import rx.Single;

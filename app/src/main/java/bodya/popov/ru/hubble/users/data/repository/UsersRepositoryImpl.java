@@ -7,6 +7,7 @@ import java.io.IOException;
 import bodya.popov.ru.hubble.users.data.api.GithubUsersApi;
 import bodya.popov.ru.hubble.users.data.bean.request.SearchUsersRequestBean;
 import bodya.popov.ru.hubble.users.data.bean.response.UsersResponseBean;
+import bodya.popov.ru.hubble.users.domain.repository.UsersRepository;
 import rx.Single;
 
 /**

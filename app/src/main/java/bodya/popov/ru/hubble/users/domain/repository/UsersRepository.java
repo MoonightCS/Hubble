@@ -1,4 +1,4 @@
-package bodya.popov.ru.hubble.users.data.repository;
+package bodya.popov.ru.hubble.users.domain.repository;
 
 import bodya.popov.ru.hubble.users.data.bean.request.SearchUsersRequestBean;
 import bodya.popov.ru.hubble.users.data.bean.response.UsersResponseBean;
